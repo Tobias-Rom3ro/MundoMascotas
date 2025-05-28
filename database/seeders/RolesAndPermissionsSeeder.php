@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use App\Models\User;
-use App\Models\ServiceCategory;
 use App\Models\Service;
+use App\Models\ServiceCategory;
+use App\Models\User;
+use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
@@ -245,66 +245,100 @@ class RolesAndPermissionsSeeder extends Seeder
         $clinicVaccines = ServiceCategory::create([
             'name' => 'Vacunas',
             'segment' => 'clinic',
-            'description' => 'Servicios de vacunación para mascotas'
+            'description' => 'Servicios de vacunación para mascotas',
         ]);
 
         $clinicGeneral = ServiceCategory::create([
             'name' => 'Medicina General',
             'segment' => 'clinic',
-            'description' => 'Consultas y tratamientos médicos generales'
+            'description' => 'Consultas y tratamientos médicos generales',
         ]);
 
         $clinicSurgery = ServiceCategory::create([
             'name' => 'Cirugía',
             'segment' => 'clinic',
-            'description' => 'Procedimientos quirúrgicos'
+            'description' => 'Procedimientos quirúrgicos',
         ]);
 
         // Categorías de Hotel
         $hotelAccommodation = ServiceCategory::create([
             'name' => 'Hospedaje',
             'segment' => 'hotel',
-            'description' => 'Servicios de alojamiento para mascotas'
+            'description' => 'Servicios de alojamiento para mascotas',
         ]);
 
         $hotelRecreation = ServiceCategory::create([
             'name' => 'Recreación',
             'segment' => 'hotel',
-            'description' => 'Actividades recreativas y ejercicio'
+            'description' => 'Actividades recreativas y ejercicio',
         ]);
 
         $hotelFood = ServiceCategory::create([
             'name' => 'Alimentación',
             'segment' => 'hotel',
-            'description' => 'Servicios de alimentación especializada'
+            'description' => 'Servicios de alimentación especializada',
         ]);
 
         $hotelTransport = ServiceCategory::create([
             'name' => 'Transporte',
             'segment' => 'hotel',
-            'description' => 'Servicios de transporte de mascotas'
+            'description' => 'Servicios de transporte de mascotas',
         ]);
 
         // Categorías de Spa
         $spaGrooming = ServiceCategory::create([
             'name' => 'Peluquería',
             'segment' => 'spa',
-            'description' => 'Servicios de peluquería y arreglo estético'
+            'description' => 'Servicios de peluquería y arreglo estético',
         ]);
 
         $spaProducts = ServiceCategory::create([
             'name' => 'Venta de Artículos',
             'segment' => 'spa',
-            'description' => 'Venta de productos para mascotas'
+            'description' => 'Venta de productos para mascotas',
         ]);
 
         // Servicios de Clínica
         Service::create(['service_category_id' => $clinicVaccines->id, 'name' => 'Vacuna Triple', 'price' => 45000]);
         Service::create(['service_category_id' => $clinicVaccines->id, 'name' => 'Vacuna Antirrábica', 'price' => 35000]);
+        Service::create(['service_category_id' => $clinicVaccines->id, 'name' => 'Vacuna Parvovirus', 'price' => 50000]);
+
         Service::create(['service_category_id' => $clinicGeneral->id, 'name' => 'Consulta General', 'price' => 60000]);
         Service::create(['service_category_id' => $clinicGeneral->id, 'name' => 'Examen de Laboratorio', 'price' => 80000]);
-        Service::create(['service_category_id' => $clinicSurgery->id, 'name' => 'Esterilización', 'price' => 250000]);
+        Service::create(['service_category_id' => $clinicGeneral->id, 'name' => 'Radiografía', 'price' => 120000]);
+        Service::create(['service_category_id' => $clinicGeneral->id, 'name' => 'Ecografía', 'price' => 150000]);
+
+        Service::create(['service_category_id' => $clinicSurgery->id, 'name' => 'Esterilización Hembra', 'price' => 250000]);
+        Service::create(['service_category_id' => $clinicSurgery->id, 'name' => 'Esterilización Macho', 'price' => 180000]);
+        Service::create(['service_category_id' => $clinicSurgery->id, 'name' => 'Cirugía Menor', 'price' => 300000]);
 
         // Servicios de Hotel
         Service::create(['service_category_id' => $hotelAccommodation->id, 'name' => 'Habitación Estándar (día)', 'price' => 40000]);
-        Service::create(['
+        Service::create(['service_category_id' => $hotelAccommodation->id, 'name' => 'Habitación Premium (día)', 'price' => 60000]);
+        Service::create(['service_category_id' => $hotelAccommodation->id, 'name' => 'Habitación Deluxe (día)', 'price' => 80000]);
+
+        Service::create(['service_category_id' => $hotelRecreation->id, 'name' => 'Paseo Individual', 'price' => 25000]);
+        Service::create(['service_category_id' => $hotelRecreation->id, 'name' => 'Sesión de Juego Grupal', 'price' => 20000]);
+        Service::create(['service_category_id' => $hotelRecreation->id, 'name' => 'Entrenamiento Básico', 'price' => 45000]);
+
+        Service::create(['service_category_id' => $hotelFood->id, 'name' => 'Alimentación Estándar', 'price' => 15000]);
+        Service::create(['service_category_id' => $hotelFood->id, 'name' => 'Alimentación Premium', 'price' => 25000]);
+        Service::create(['service_category_id' => $hotelFood->id, 'name' => 'Dieta Especial', 'price' => 35000]);
+
+        Service::create(['service_category_id' => $hotelTransport->id, 'name' => 'Transporte Local', 'price' => 30000]);
+        Service::create(['service_category_id' => $hotelTransport->id, 'name' => 'Transporte Intermunicipal', 'price' => 80000]);
+
+        // Servicios de Spa
+        Service::create(['service_category_id' => $spaGrooming->id, 'name' => 'Baño Completo', 'price' => 35000]);
+        Service::create(['service_category_id' => $spaGrooming->id, 'name' => 'Corte de Pelo', 'price' => 25000]);
+        Service::create(['service_category_id' => $spaGrooming->id, 'name' => 'Limpieza de Oídos', 'price' => 15000]);
+        Service::create(['service_category_id' => $spaGrooming->id, 'name' => 'Corte de Uñas', 'price' => 12000]);
+        Service::create(['service_category_id' => $spaGrooming->id, 'name' => 'Paquete Completo de Spa', 'price' => 70000]);
+
+        Service::create(['service_category_id' => $spaProducts->id, 'name' => 'Shampoo Medicado', 'price' => 28000]);
+        Service::create(['service_category_id' => $spaProducts->id, 'name' => 'Collar Antipulgas', 'price' => 18000]);
+        Service::create(['service_category_id' => $spaProducts->id, 'name' => 'Juguete Interactivo', 'price' => 22000]);
+        Service::create(['service_category_id' => $spaProducts->id, 'name' => 'Cama para Mascotas', 'price' => 45000]);
+        Service::create(['service_category_id' => $spaProducts->id, 'name' => 'Alimento Premium (Kg)', 'price' => 12000]);
+    }
+}
