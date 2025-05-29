@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Client;
-use App\Models\Pet;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
@@ -23,7 +22,7 @@ class ClientController extends Controller
         // Filtros
         if ($request->has('search') && $request->search) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
                     ->orWhere('email', 'like', "%{$search}%")
                     ->orWhere('phone', 'like', "%{$search}%")
@@ -82,11 +81,11 @@ class ClientController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:clients,email,' . $client->id,
+            'email' => 'required|email|unique:clients,email,'.$client->id,
             'phone' => 'required|string|max:20',
             'address' => 'required|string',
             'identification_type' => 'required|in:CC,CE,NIT,PP',
-            'identification_number' => 'required|string|unique:clients,identification_number,' . $client->id,
+            'identification_number' => 'required|string|unique:clients,identification_number,'.$client->id,
         ]);
 
         if ($validator->fails()) {
@@ -103,6 +102,7 @@ class ClientController extends Controller
     {
         try {
             $client->delete();
+
             return redirect()->route('clients.index')
                 ->with('success', 'Cliente eliminado exitosamente.');
         } catch (\Exception $e) {
@@ -119,7 +119,7 @@ class ClientController extends Controller
             'pets.medicalRecords.veterinarian',
             'pets.vaccinations',
             'hotelStays',
-            'appointments.service'
+            'appointments.service',
         ]);
 
         return view('clients.history', compact('client'));
